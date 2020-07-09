@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	<select id="selectListByMap" parameterType="map" resultType="boardVo">
+		<!-- boardVo의 getter setter에 맞게 뽑아내지 않으면(as ) 값 안들어가는거 주의 -->
+		<![CDATA[
+			SELECT  B.brdNo as no,
+					B.brdTitle as title,
+					B.brdContent as content,
+					B.usrName as name,
+					B.brdHit as hit,
+					to_char(B.brdRegDate, 'YYYY-MM-DD HH24:MI') as reg_date,
+					B.usrNo as user_no,
+					B.TOTCNT as count
+			FROM (SELECT A.brdNO,
+						 A.brdTitle,
+						 A.brdContent,
+						 A.usrName,
+						 A.brdHit,
+						 A.brdRegDate,
+						 A.usrNo,
+						 ROWNUM AS RNUM,
+						 COUNT(*) OVER() AS TOTCNT
+				 FROM (SELECT b.no as brdNo,
+				 		      b.title as brdTitle,
+				 		      b.content as brdContent,
+				 		      u.name as usrName,
+				 		      b.hit as brdHit,
+				 		      b.reg_date as brdRegDate,
+				 		      u.no as usrNo
+				 	  FROM users u, board b
+				 	  where u.no = b.user_no
+			]]>
+			
+			<if test="str != '' ">
+					  and b.title like '%' || #{str} || '%'
+			</if>
+			
+			<![CDATA[	 	
+				 	  ORDER BY b.no desc) A 
+			 	 ) B
+		 	WHERE RNUM between #{betweenStart} and #{betweenEnd}
+			]]>
+	</select>
+
+	<insert id="insert" parameterType="boardVo">
+		<![CDATA[
+			INSERT INTO board
+			VALUES (seq_board_no.nextval, #{title}, #{content}, #{hit}, sysdate, #{userNo})
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from board
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<select id="selectBoardVo" parameterType="int" resultType="boardVo">
+		<![CDATA[
+			select b.no,
+				   b.title,
+				   b.content,
+				   u.name,
+				   b.hit,
+				   to_char(b.reg_date, 'YYYY-MM-DD HH:MI') reg_date,
+				   u.no userNo
+			from board b, users u
+			where b.user_no = u.no
+			and b.no = #{no}
+		]]>
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		<![CDATA[
+			UPDATE board
+			SET hit = hit + 1
+			WHERE no = #{no}
+		]]>
+	</update>
+	
+	<update id="updateBoardVo" parameterType="BoardVo">
+		<![CDATA[
+			update board
+			set title = #{title},
+			    content = #{content}
+			where no = #{no}
+		]]>
+	</update>
+</mapper>
