@@ -69,7 +69,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${bList}" var="vo">
+							<c:forEach items="${pagingResult.bList}" var="vo">
 							<tr>
 								<td>${vo.no}</td>
 								<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?page=${param.page}&no=${vo.no}&str=${param.str}">${vo.title}</a></td>
