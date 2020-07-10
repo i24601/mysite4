@@ -64,10 +64,11 @@ public class BoardController {
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("no") int no,
-						 @RequestParam("page")int page) {
+						 @RequestParam("page")int page,
+						 @RequestParam("str")String str) {
 		System.out.println("BoardController:delete()");
 		boardService.delete(no);
-		return "redirect:/board/list?page="+page;
+		return "redirect:/board/list?page="+page+"&str="+str;
 	}
 	
 	@RequestMapping("/read")
