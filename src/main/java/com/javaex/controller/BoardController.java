@@ -47,7 +47,7 @@ public class BoardController {
 		model.addAttribute("pagingResult", pagingResult);
 		return "board/list";
 	}
-
+	
 	@RequestMapping(value="/writeForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String writeForm() {
 		return "board/writeForm";

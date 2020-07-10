@@ -45,24 +45,30 @@ public class BoardService {
 	}
 
 	public Map<String, Object> getList(Map<String, Object> pageInfo) {
-		
-		String str = (String)pageInfo.get("str");
-		int page = (int)pageInfo.get("page");
-		int postNumber = (int)pageInfo.get("postNumber");
-		
+
+		String str = (String) pageInfo.get("str");
+		int page = (int) pageInfo.get("page");
+		int postNumber = (int) pageInfo.get("postNumber");
+		int count;
 		int firstPage;
 		int lastPage;
 		int prevPage;
 		int nextPage;
-		
+
 		Map<String, Object> paging = new HashMap<>();
 		paging.put("str", str);
-		paging.put("betweenStart", 1+postNumber*(page-1));
-		paging.put("betweenEnd", postNumber*page);
-		
+		paging.put("betweenStart", 1 + postNumber * (page - 1));
+		paging.put("betweenEnd", postNumber * page);
+
 		List<BoardVo> bList = boardDao.selectListByMap(paging);
-		int count = bList.get(0).getCount();
-		
+		System.out.println(bList.size());
+		System.out.println(bList.toString());
+
+		if (bList.size() == 0 || bList == null) {
+			count = 1;
+		} else {
+			count = bList.get(0).getCount();
+		}
 
 		// 블록1 = 1~10페이지, 블록2 = 11~20페이지
 		int currentBlock = (int) Math.ceil(((float) page) / 10);
@@ -100,7 +106,7 @@ public class BoardService {
 			prevPage = 1;
 			nextPage = lastPage;
 		}
-		
+
 		Map<String, Object> pagingResult = new HashMap<>();
 		pagingResult.put("bList", bList);
 		pagingResult.put("firstPage", firstPage);
