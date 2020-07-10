@@ -39,4 +39,5 @@ public class BoardDao {
 	public int updateBoardVo(BoardVo boardVo) {
 		return sqlSession.update("board.updateBoardVo", boardVo);
 	}
+	
 }

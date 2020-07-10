@@ -83,9 +83,12 @@
 						</div>
 						
 						<c:if test="${sessionScope.authUser.no eq bVo.userNo}">								
-						<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${param.no}&page=${param.page}">수정</a>
+						<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${param.no}&page=${param.page}&str=${param.str}">수정</a>
 									</c:if>
-						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list?page=${param.page}">목록</a>
+						<c:if test="${sessionScope.authUser.no ne null}">
+						<a id="btn_modify" href="${pageContext.request.contextPath}/board/writeForm?page=${param.page}&str=${param.str}&no=${param.no}">댓글쓰기</a>
+						</c:if>
+						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}">목록</a>
 						
 					</form>
 	                <!-- //form -->

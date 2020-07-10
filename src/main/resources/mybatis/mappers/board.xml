@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board">
-	<select id="selectListByMap" parameterType="map" resultType="boardVo">
+	<select id="selectListByMap" parameterType="map"
+		resultType="boardVo">
 		<!-- boardVo의 getter setter에 맞게 뽑아내지 않으면(as ) 값 안들어가는거 주의 -->
 		<![CDATA[
 			SELECT  B.brdNo as no,
@@ -12,7 +13,10 @@
 					B.brdHit as hit,
 					to_char(B.brdRegDate, 'YYYY-MM-DD HH24:MI') as reg_date,
 					B.usrNo as user_no,
-					B.TOTCNT as count
+					B.TOTCNT as count,
+					B.group_no as group_no,
+					B.order_no as order_no,
+					B.depth as depth
 			FROM (SELECT A.brdNO,
 						 A.brdTitle,
 						 A.brdContent,
@@ -21,21 +25,27 @@
 						 A.brdRegDate,
 						 A.usrNo,
 						 ROWNUM AS RNUM,
-						 COUNT(*) OVER() AS TOTCNT
+						 COUNT(*) OVER() AS TOTCNT,
+						 A.group_no,
+						 A.order_no,
+						 A.depth
 				 FROM (SELECT b.no as brdNo,
 				 		      b.title as brdTitle,
 				 		      b.content as brdContent,
 				 		      u.name as usrName,
 				 		      b.hit as brdHit,
 				 		      b.reg_date as brdRegDate,
-				 		      u.no as usrNo
+				 		      u.no as usrNo,
+				 		      b.group_no,
+				 		      b.order_no,
+				 		      b.depth
 				 	  FROM users u, board b
 				 	  where u.no = b.user_no
 			]]>
-			
-			<if test="str != '' ">
-					  and b.title like '%' || #{str} || '%'
-			</if>
+
+		<if test="str != '' ">
+			and b.title like '%' || #{str} || '%'
+		</if>
 			
 			<![CDATA[	 	
 				 	  ORDER BY b.no desc) A 
@@ -45,20 +55,40 @@
 	</select>
 
 	<insert id="insert" parameterType="boardVo">
+	
 		<![CDATA[
 			INSERT INTO board
-			VALUES (seq_board_no.nextval, #{title}, #{content}, #{hit}, sysdate, #{userNo})
+			VALUES (seq_board_no.nextval, 
+			        #{title}, #{content}, 
+			        #{hit}, 
+			        sysdate, 
+			        #{userNo},
+		]]>
+		<choose>
+			<when test="no == 0">
+				<!-- 한 sql문에서는 seq를 여러번 사용하더라도 동일한 값을 주기에(db에서 잡고있음) currval 사용 그게 아니라면 select key로 seq문법으로 seq먼저 받아야함 -->
+				seq_board_no.currval,
+			</when>
+
+			<otherwise>
+				#{group_no},
+			</otherwise>
+		</choose>
+		<![CDATA[
+			        #{order_no}, 
+			        #{depth})
 		]]>
 	</insert>
-	
+
 	<delete id="delete" parameterType="int">
 		<![CDATA[
 			delete from board
 			where no = #{no}
 		]]>
 	</delete>
-	
-	<select id="selectBoardVo" parameterType="int" resultType="boardVo">
+
+	<select id="selectBoardVo" parameterType="int"
+		resultType="boardVo">
 		<![CDATA[
 			select b.no,
 				   b.title,
@@ -72,7 +102,7 @@
 			and b.no = #{no}
 		]]>
 	</select>
-	
+
 	<update id="updateHit" parameterType="int">
 		<![CDATA[
 			UPDATE board
@@ -80,7 +110,7 @@
 			WHERE no = #{no}
 		]]>
 	</update>
-	
+
 	<update id="updateBoardVo" parameterType="BoardVo">
 		<![CDATA[
 			update board
@@ -89,4 +119,9 @@
 			where no = #{no}
 		]]>
 	</update>
+
+	<select id="getSql">
+		select seq_board_no.nextval from board
+	</select>
+
 </mapper>

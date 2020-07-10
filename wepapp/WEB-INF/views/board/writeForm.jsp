@@ -62,9 +62,15 @@
 							<textarea id="txt-content" name="content"></textarea>
 						</div>
 						
-						<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}">취소</a>
+						<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}&no=${param.no}">취소</a>
 						<button id="btn_add" type="submit" >등록</button>
 						<input type="hidden" name="page" value="1">
+						
+						<!-- no없으면 setter가 동작을 안해서 400에러 남.. -->
+						<c:if test="${param.no ne null}">
+							<input type="text" name="no" value="${param.no}">							
+						</c:if>
+						
 					</form>
 	                <!-- //form -->
 				</div>

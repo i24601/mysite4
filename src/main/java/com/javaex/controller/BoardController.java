@@ -1,7 +1,8 @@
 package com.javaex.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
+	//0이나 null이면 문제발생하므로 param 받는경우 디폴트설정
 	public String list(@RequestParam("page") int page,
 					   @RequestParam( value = "str", required=false, defaultValue="") String str,
 					   Model model){
@@ -57,8 +59,10 @@ public class BoardController {
 	public String write(@ModelAttribute BoardVo boardVo, 
 						HttpSession session) {
 		boardVo.setUser_no(((UserVo)session.getAttribute("authUser")).getNo());
+		System.out.println("BoardController:write");
 		System.out.println(boardVo.toString());
 		boardService.boardWrite(boardVo);
+		System.out.println("글을 썼고 그것은 : "+boardVo.toString());
 		return "redirect:/board/list?page=1";
 	}
 	
@@ -90,10 +94,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/modify")
-	public String modify(@ModelAttribute BoardVo boardVo, @RequestParam("page")int page, Model model) {
+	public String modify(@ModelAttribute BoardVo boardVo, @RequestParam("page")int page, @RequestParam("str")String str, Model model) throws UnsupportedEncodingException {
+		System.out.println("modify tostring");
 		System.out.println(boardVo.toString());
 		boardService.modify(boardVo);
-		return "redirect:/board/list?page="+page;
+		System.out.println("modify str = "+str);
+		String testuri = "redirect:/board/list?page="+page+"&str="+str;
+		System.out.println("testuri " + testuri);
+		//redirect시 한글깨짐 방지
+		String encodedParam = URLEncoder.encode(str, "UTF-8");
+		//redirect시 한글깨짐 방지 END
+		return "redirect:/board/list?page="+page+"&str="+encodedParam;
 	}
 	
 }

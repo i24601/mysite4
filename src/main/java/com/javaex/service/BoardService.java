@@ -15,8 +15,23 @@ public class BoardService {
 
 	@Autowired
 	private BoardDao boardDao;
-
+	
 	public int boardWrite(BoardVo boardVo) {
+		System.out.println("BoardService:write");
+		
+		//댓글쓸때
+		if(boardVo.getNo()!=0) {
+			System.out.println("댓글이네 보드 번호");
+			System.out.println(boardVo.getOrder_no());
+			int no = boardVo.getNo();
+			boardVo.setGroup_no(no);
+			int newOrderNum = (boardVo.getOrder_no()+1);
+			boardVo.setOrder_no(newOrderNum);
+		}
+		else {
+		boardVo.setOrder_no(1);
+		}
+		
 		System.out.println(boardVo.toString());
 		return boardDao.insert(boardVo);
 

@@ -1,24 +1,58 @@
 package com.javaex.vo;
 
 public class BoardVo {
-	private int no, hit, userNo, count;
+	private int no, hit, userNo, count, group_no, order_no, depth;
 	private String title, content, reg_date, name;
 
 	public BoardVo() {
 	}
 	
-	public BoardVo(int no, int hit, int userNo, String title, String content, String reg_date, String name, int count) {
+	public BoardVo(int no, int hit, int userNo, int count, int group_no, int order_no, int depth, String title,
+			String content, String reg_date, String name) {
 		this.no = no;
 		this.hit = hit;
 		this.userNo = userNo;
+		this.count = count;
+		this.group_no = group_no;
+		this.order_no = order_no;
+		this.depth = depth;
 		this.title = title;
 		this.content = content;
 		this.reg_date = reg_date;
 		this.name = name;
-		this.count = count;
 	}
 
+	
 
+
+
+	public int getGroup_no() {
+		return group_no;
+	}
+
+	public void setGroup_no(int group_no) {
+		this.group_no = group_no;
+	}
+
+	public int getOrder_no() {
+		return order_no;
+	}
+
+	public void setOrder_no(int order_no) {
+		this.order_no = order_no;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	public int getNo() {
 		return no;
@@ -109,9 +143,12 @@ public class BoardVo {
 
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", hit=" + hit + ", useNo=" + userNo + ", count=" + count + ", title=" + title
-				+ ", content=" + content + ", reg_date=" + reg_date + ", name=" + name + "]";
+		return "BoardVo [no=" + no + ", hit=" + hit + ", userNo=" + userNo + ", count=" + count + ", group_no="
+				+ group_no + ", order_no=" + order_no + ", depth=" + depth + ", title=" + title + ", content=" + content
+				+ ", reg_date=" + reg_date + ", name=" + name + "]";
 	}
+
+	
 
 	
 	
