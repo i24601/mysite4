@@ -76,8 +76,6 @@
 							<input type="text" name="group_no" value="${param.group_no}">							
 							<input type="text" name="order_no" value="${param.order_no}">
 						</c:if>
-						
-						
  													
 					</form>
 	                <!-- //form -->

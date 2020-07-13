@@ -50,7 +50,7 @@ public class BoardService {
 
 	public int delete(int no) {
 		System.out.println("BoardService:delete()");
-
+		
 		return boardDao.deleteByNo(no);
 	}
 
@@ -132,7 +132,7 @@ public class BoardService {
 			prevPage = 1;
 			nextPage = lastPage;
 		}
-
+		
 		Map<String, Object> pagingResult = new HashMap<>();
 		pagingResult.put("bList", bList);
 		pagingResult.put("firstPage", firstPage);

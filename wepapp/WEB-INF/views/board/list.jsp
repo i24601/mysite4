@@ -72,7 +72,17 @@
 							<c:forEach items="${pagingResult.bList}" var="vo">
 							<tr>
 								<td>${vo.no}</td>
-								<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?page=${param.page}&no=${vo.no}&str=${param.str}">${vo.title}</a></td>
+								<td class="text-left">
+								<a href="${pageContext.request.contextPath}/board/read?page=${param.page}&no=${vo.no}&str=${param.str}">
+								<c:if test="${vo.depth ne 0}">								
+								<c:forEach begin="1" end="${vo.depth}">
+								&nbsp;
+								</c:forEach>
+								>
+								</c:if>
+								${vo.title}
+								</a>
+								</td>
 								<td>${vo.name}</td>
 								<td>${vo.hit}</td>
 								<td>${vo.reg_date}</td>
