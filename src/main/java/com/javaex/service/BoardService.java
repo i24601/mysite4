@@ -51,7 +51,14 @@ public class BoardService {
 	public int delete(int no) {
 		System.out.println("BoardService:delete()");
 		
-		return boardDao.deleteByNo(no);
+		
+		BoardVo bVo = boardDao.selectBoardVo(no);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("no", no);
+		map.put("depth", bVo.getDepth());
+		map.put("group_no", bVo.getGroup_no());
+		map.put("order_no", bVo.getOrder_no());
+		return boardDao.deleteByMap(map);
 	}
 
 	public BoardVo readUser(int no, String str) {
@@ -89,7 +96,9 @@ public class BoardService {
 		List<BoardVo> bList = boardDao.selectListByMap(paging);
 		System.out.println(bList.size());
 		System.out.println(bList.toString());
-
+		
+		//count는 전체 게시글 갯수
+		//초기에 글이 하나도 없는경우 default값으로 1을 줌
 		if (bList.size() == 0 || bList == null) {
 			count = 1;
 		} else {

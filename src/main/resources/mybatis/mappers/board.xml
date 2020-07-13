@@ -81,10 +81,14 @@
 		]]>
 	</insert>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="map">
 		<![CDATA[
 			delete from board
-			where no = #{no}
+			where no = #{no} and
+			
+			(select count(no) from board 
+			where group_no = #{group_no}
+			and depth>#{depth}) = 0		
 		]]>
 	</delete>
 

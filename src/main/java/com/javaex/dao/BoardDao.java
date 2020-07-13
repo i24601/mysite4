@@ -24,8 +24,9 @@ public class BoardDao {
 		return sqlSession.insert("board.insert", boardVo);
 	}
 	
-	public int deleteByNo(int no) {
-		return sqlSession.delete("board.delete", no);
+	public int deleteByMap(Map<String, Integer> map) {
+		System.out.println(map.toString());
+		return sqlSession.delete("board.delete", map);
 	}
 	
 	public int updateHit(int no) {
