@@ -88,7 +88,9 @@
 			
 			(select count(no) from board 
 			where group_no = #{group_no}
-			and depth>#{depth}) = 0		
+			and depth>#{depth}
+			and order_no = #{order_no}-1) = 0
+				
 		]]>
 	</delete>
 
@@ -132,6 +134,15 @@
 		<![CDATA[
 			update board
 			set order_no = order_no + 1
+			where group_no = #{group_no} and
+			order_no >= #{order_no}
+		]]>
+	</update>
+	
+	<update id="updateOrderNo2" parameterType="map">
+		<![CDATA[
+			update board
+			set order_no = order_no - 1
 			where group_no = #{group_no} and
 			order_no >= #{order_no}
 		]]>

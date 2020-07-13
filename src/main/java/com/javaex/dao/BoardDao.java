@@ -45,4 +45,7 @@ public class BoardDao {
 		return sqlSession.update("board.updateOrderNo", map);
 	}
 	
+	public int updateOrderNo2(Map<String, Integer> map) {
+		return sqlSession.update("board.updateOrderNo2", map);
+	}
 }

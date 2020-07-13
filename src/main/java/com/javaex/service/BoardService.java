@@ -58,7 +58,11 @@ public class BoardService {
 		map.put("depth", bVo.getDepth());
 		map.put("group_no", bVo.getGroup_no());
 		map.put("order_no", bVo.getOrder_no());
-		return boardDao.deleteByMap(map);
+		int result = boardDao.deleteByMap(map);
+		if(result==1) {
+			boardDao.updateOrderNo2(map);
+		}
+		return result;
 	}
 
 	public BoardVo readUser(int no, String str) {
