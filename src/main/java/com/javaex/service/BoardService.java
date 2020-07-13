@@ -27,9 +27,10 @@ public class BoardService {
 			int no = boardVo.getGroup_no();
 			boardVo.setGroup_no(no);
 			
-			Map<String, Integer> orderData = new HashMap<>();
+			Map<String, Object> orderData = new HashMap<>();
 			orderData.put("group_no", boardVo.getGroup_no());
 			orderData.put("order_no", boardVo.getOrder_no());
+			orderData.put("key", "up");
 			System.out.println("map값"+orderData.toString());
 			
 			boardDao.updateOrderNo(orderData);
@@ -53,14 +54,17 @@ public class BoardService {
 		
 		
 		BoardVo bVo = boardDao.selectBoardVo(no);
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("key", "down");
 		map.put("no", no);
 		map.put("depth", bVo.getDepth());
 		map.put("group_no", bVo.getGroup_no());
 		map.put("order_no", bVo.getOrder_no());
+		
 		int result = boardDao.deleteByMap(map);
 		if(result==1) {
-			boardDao.updateOrderNo2(map);
+			boardDao.updateOrderNo(map);
 		}
 		return result;
 	}

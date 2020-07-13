@@ -24,7 +24,7 @@ public class BoardDao {
 		return sqlSession.insert("board.insert", boardVo);
 	}
 	
-	public int deleteByMap(Map<String, Integer> map) {
+	public int deleteByMap(Map<String, Object> map) {
 		System.out.println(map.toString());
 		return sqlSession.delete("board.delete", map);
 	}
@@ -41,11 +41,7 @@ public class BoardDao {
 		return sqlSession.update("board.updateBoardVo", boardVo);
 	}
 	
-	public int updateOrderNo(Map<String, Integer> map) {
+	public int updateOrderNo(Map<String, Object> map) {
 		return sqlSession.update("board.updateOrderNo", map);
-	}
-	
-	public int updateOrderNo2(Map<String, Integer> map) {
-		return sqlSession.update("board.updateOrderNo2", map);
 	}
 }
