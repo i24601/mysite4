@@ -33,7 +33,7 @@ public class BoardController {
 					   Model model){
 		
 		// 페이지당 포스트 숫자 입력
-		int postNumber = 3;
+		int postNumber = 10;
 		
 		System.out.println("BoardController:list()");
 		System.out.println(page);

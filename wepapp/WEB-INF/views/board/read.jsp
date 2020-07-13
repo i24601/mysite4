@@ -86,7 +86,7 @@
 						<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${param.no}&page=${param.page}&str=${param.str}">수정</a>
 									</c:if>
 						<c:if test="${sessionScope.authUser.no ne null}">
-						<a id="btn_modify" href="${pageContext.request.contextPath}/board/writeForm?page=${param.page}&str=${param.str}&no=${param.no}">댓글쓰기</a>
+						<a id="btn_modify" href="${pageContext.request.contextPath}/board/writeForm?page=${param.page}&str=${param.str}&no=${param.no}&order_no=${bVo.order_no}&depth=${bVo.depth}&group_no=${bVo.group_no}">댓글쓰기</a>
 						</c:if>
 						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}">목록</a>
 						

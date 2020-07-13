@@ -51,6 +51,7 @@
 				 	  ORDER BY b.no desc) A 
 			 	 ) B
 		 	WHERE RNUM between #{betweenStart} and #{betweenEnd}
+		 	order by group_no desc, order_no desc
 			]]>
 	</select>
 
@@ -96,7 +97,10 @@
 				   u.name,
 				   b.hit,
 				   to_char(b.reg_date, 'YYYY-MM-DD HH:MI') reg_date,
-				   u.no userNo
+				   u.no userNo,
+				   b.group_no as group_no,
+				   b.order_no as order_no,
+				   b.depth as depth
 			from board b, users u
 			where b.user_no = u.no
 			and b.no = #{no}
@@ -119,9 +123,13 @@
 			where no = #{no}
 		]]>
 	</update>
-
-	<select id="getSql">
-		select seq_board_no.nextval from board
-	</select>
-
+	
+	<update id="updateOrderNo" parameterType="map">
+		<![CDATA[
+			update board
+			set order_no = order_no + 1
+			where group_no = #{group_no} and
+			order_no >= #{order_no}
+		]]>
+	</update>
 </mapper>

@@ -65,12 +65,21 @@
 						<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}&no=${param.no}">취소</a>
 						<button id="btn_add" type="submit" >등록</button>
 						<input type="hidden" name="page" value="1">
-						
+						<c:if test="${param.no ne null}">
+						<input type="hidden" name="order_no" value="${param.order_no}">
+						</c:if>
 						<!-- no없으면 setter가 동작을 안해서 400에러 남.. -->
 						<c:if test="${param.no ne null}">
 							<input type="text" name="no" value="${param.no}">							
 						</c:if>
+						<c:if test="${param.depth ne null}">
+							<input type="text" name="depth" value="${param.depth}">							
+						</c:if>
 						
+						<c:if test="${param.depth ne null}">						
+							<input type="text" name="group_no" value="${param.group_no}">							
+						</c:if>
+							
 					</form>
 	                <!-- //form -->
 				</div>

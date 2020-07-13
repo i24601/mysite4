@@ -21,15 +21,26 @@ public class BoardService {
 		
 		//댓글쓸때
 		if(boardVo.getNo()!=0) {
-			System.out.println("댓글이네 보드 번호");
-			System.out.println(boardVo.getOrder_no());
-			int no = boardVo.getNo();
+			System.out.println("댓글쓰기");
+			System.out.println(boardVo.toString());
+			
+			int no = boardVo.getGroup_no();
 			boardVo.setGroup_no(no);
-			int newOrderNum = (boardVo.getOrder_no()+1);
-			boardVo.setOrder_no(newOrderNum);
+			
+			Map<String, Integer> orderData = new HashMap<>();
+			orderData.put("group_no", boardVo.getGroup_no());
+			orderData.put("order_no", boardVo.getOrder_no());
+			System.out.println("map값"+orderData.toString());
+			
+			boardDao.updateOrderNo(orderData);
+			
+			int newDepth = boardVo.getDepth()+1;
+			boardVo.setDepth(newDepth);
+			
 		}
 		else {
 		boardVo.setOrder_no(1);
+		boardVo.setDepth(0);
 		}
 		
 		System.out.println(boardVo.toString());
