@@ -70,7 +70,9 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${pagingResult.bList}" var="vo">
-							<tr>
+							<c:choose>
+							 <c:when test = "${vo.deleteFlag ne 1}">
+							<tr>								
 								<td>${vo.no}</td>
 								<td class="text-left">
 								<a href="${pageContext.request.contextPath}/board/read?page=${param.page}&no=${vo.no}&str=${param.str}">
@@ -92,7 +94,20 @@
 									</c:if>
 								</td>
 							</tr>
-							</c:forEach>
+							</c:when>
+							
+							<c:otherwise>
+								<tr>
+								<td>${vo.no}</td>
+								<td>삭제된 게시글</td>
+								<td>${vo.name}</td>
+								<td>${vo.hit}</td>
+								<td>${vo.reg_date}</td>
+								<td></td>
+								</tr>
+							</c:otherwise>
+							</c:choose>
+								</c:forEach>
 						</tbody>
 					</table>
 		

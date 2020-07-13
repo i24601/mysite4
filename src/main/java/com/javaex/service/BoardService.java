@@ -61,10 +61,16 @@ public class BoardService {
 		map.put("depth", bVo.getDepth());
 		map.put("group_no", bVo.getGroup_no());
 		map.put("order_no", bVo.getOrder_no());
-		
+		//삭제
 		int result = boardDao.deleteByMap(map);
 		if(result==1) {
+			//삭제결과 true
 			boardDao.updateOrderNo(map);
+		}
+		
+		else {
+			//상태창을 삭제로 변경
+			boardDao.updateDelete(bVo.getNo());
 		}
 		return result;
 	}

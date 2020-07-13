@@ -1,14 +1,14 @@
 package com.javaex.vo;
 
 public class BoardVo {
-	private int no, hit, userNo, count, group_no, order_no, depth;
+	private int no, hit, userNo, count, group_no, order_no, depth, deleteFlag;
 	private String title, content, reg_date, name;
 
 	public BoardVo() {
 	}
 	
 	public BoardVo(int no, int hit, int userNo, int count, int group_no, int order_no, int depth, String title,
-			String content, String reg_date, String name) {
+			String content, String reg_date, String name, int deleteFlag) {
 		this.no = no;
 		this.hit = hit;
 		this.userNo = userNo;
@@ -20,11 +20,20 @@ public class BoardVo {
 		this.content = content;
 		this.reg_date = reg_date;
 		this.name = name;
+		this.deleteFlag = deleteFlag;
 	}
 
 	
+	
 
 
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
 
 	public int getGroup_no() {
 		return group_no;
@@ -144,10 +153,12 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", hit=" + hit + ", userNo=" + userNo + ", count=" + count + ", group_no="
-				+ group_no + ", order_no=" + order_no + ", depth=" + depth + ", title=" + title + ", content=" + content
-				+ ", reg_date=" + reg_date + ", name=" + name + "]";
+				+ group_no + ", order_no=" + order_no + ", depth=" + depth + ", deleteFlag=" + deleteFlag + ", title="
+				+ title + ", content=" + content + ", reg_date=" + reg_date + ", name=" + name + "]";
 	}
 
+	
+	
 	
 
 	
