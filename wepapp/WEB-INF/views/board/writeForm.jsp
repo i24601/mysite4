@@ -65,21 +65,20 @@
 						<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list?page=${param.page}&str=${param.str}&no=${param.no}">취소</a>
 						<button id="btn_add" type="submit" >등록</button>
 						<input type="hidden" name="page" value="1">
-						<c:if test="${param.no ne null}">
-						<input type="hidden" name="order_no" value="${param.order_no}">
-						</c:if>
 						<!-- no없으면 setter가 동작을 안해서 400에러 남.. -->
+						<!-- vo에서 예외처리를 하거나 vo는 혼자쓰라고 만든게 아니지만 -->
+						<!-- 보낼때 c:if로 null 체크하거나 -->
+						<!-- 새글을 쓸때는 공통으로 no depth group_no order_no등에 값이 없어 setter 오류날수 있으므로 if문 처리 -->
+												
 						<c:if test="${param.no ne null}">
 							<input type="text" name="no" value="${param.no}">							
-						</c:if>
-						<c:if test="${param.depth ne null}">
 							<input type="text" name="depth" value="${param.depth}">							
+							<input type="text" name="group_no" value="${param.group_no}">							
+							<input type="text" name="order_no" value="${param.order_no}">
 						</c:if>
 						
-						<c:if test="${param.depth ne null}">						
-							<input type="text" name="group_no" value="${param.group_no}">							
-						</c:if>
-							
+						
+ 													
 					</form>
 	                <!-- //form -->
 				</div>
