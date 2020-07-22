@@ -5,7 +5,8 @@
     <typeAliases>
 		<typeAlias alias="UserVo" type="com.javaex.vo.UserVo" />
 		<typeAlias alias="guestbookVo" type="com.javaex.vo.GuestbookVo" />
-		<typeAlias alias="boardVo" type="com.javaex.vo.BoardVo" />						
+		<typeAlias alias="boardVo" type="com.javaex.vo.BoardVo" />
+		<typeAlias alias="galleryVo" type="com.javaex.vo.GalleryVo" />							
 	</typeAliases>
 	<!-- mapper에서 parameterType을 간략히 하기위해 -->
 	
@@ -13,5 +14,6 @@
         <mapper resource="mybatis/mappers/user.xml" />
         <mapper resource="mybatis/mappers/guestbook.xml" />
         <mapper resource="mybatis/mappers/board.xml" />
+        <mapper resource="mybatis/mappers/gallery.xml" />
     </mappers>
 </configuration>

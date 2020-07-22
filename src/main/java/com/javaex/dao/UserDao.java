@@ -35,4 +35,12 @@ public class UserDao {
 		System.out.println("userDao:userUpdate");
 		return sqlSession.update("user.userUpdate", userVo);
 	}
+	
+	//아이디체크
+	public UserVo selectUser(String id) {
+		System.out.println("userDao:selectUseraaa");
+		System.out.println(id);
+		return sqlSession.selectOne("user.selectById", id);
+	}
+	
 }

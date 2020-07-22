@@ -38,4 +38,9 @@ public class UserService {
 		System.out.println("userService:modifyUser");
 		return userDao.userUpdate(userVo);
 	}
+	
+	public UserVo checkId(String id) {
+		UserVo userVo = userDao.selectUser(id);
+		return userVo;
+	}
 }

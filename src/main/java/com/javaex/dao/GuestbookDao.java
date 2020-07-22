@@ -31,4 +31,16 @@ public class GuestbookDao {
 		System.out.println("userDao:deleteByGuestbookVo()");
 		return sqlSession.delete("guestbook.delete", guestbookVo);
 	}
+	
+	//ajax용 글 등록
+	public void insertSelectKey(GuestbookVo guestbookVo) {
+		sqlSession.insert("guestbook.insertSelectKey", guestbookVo);
+	}
+	
+	public GuestbookVo selectByNo(int no) {
+		GuestbookVo gVo = sqlSession.selectOne("guestbook.selectByNo",no);
+		System.out.println("no확인");
+		System.out.println(gVo.toString());
+		return gVo;
+	}
 }

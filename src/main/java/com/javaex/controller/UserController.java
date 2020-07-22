@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -95,5 +97,19 @@ public class UserController {
 //		session.setAttribute("authUser", uVo);
 		return "redirect:/main/index";
 	}
-
+	
+	//ajax용
+	@ResponseBody
+	@RequestMapping("/idcheck")
+	public boolean idcheck(@RequestParam ("userId") String id) {
+		boolean chk;
+		System.out.println(id);
+		UserVo uVo = userService.checkId(id);
+		if(uVo==null) {
+			chk=true;
+		} else {
+			chk=false;
+		}
+		return chk;
+	}
 }

@@ -29,7 +29,7 @@
 
 		<!-- //nav -->
 
-		<c:import url="/WEB-INF/views/include/aSideUser.jsp">
+		<c:import url="/WEB-INF/views/include/aSideGuestbook.jsp">
 		</c:import>
 
 		<!-- //aside -->

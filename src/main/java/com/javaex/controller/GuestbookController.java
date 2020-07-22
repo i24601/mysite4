@@ -46,4 +46,9 @@ public class GuestbookController {
 		guestbookService.delete(guestbookVo);
 		return "redirect:/guestbook/list";
 	}
+	
+	@RequestMapping("/ajaxList")
+	public String ajaxList(Model model) {
+		return "guestbook/ajaxList";
+	}
 }

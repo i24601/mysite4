@@ -5,7 +5,7 @@
 
 <div id="header">
 	<h1>
-		<a href="/mysite2/main">MySite</a>
+		<a href="/mysite4/main/index">MySite</a>
 	</h1>
 
 

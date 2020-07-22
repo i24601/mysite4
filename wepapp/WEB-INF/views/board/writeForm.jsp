@@ -27,7 +27,7 @@
 
 		<!-- //nav -->
 
-		<c:import url="/WEB-INF/views/include/aSideUser.jsp">
+		<c:import url="/WEB-INF/views/include/aSideBoard.jsp">
 		</c:import>
 
 		<!-- //aside -->

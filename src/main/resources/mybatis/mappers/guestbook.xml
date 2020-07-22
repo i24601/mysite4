@@ -16,11 +16,29 @@
 			VALUES (seq_guestbook_content_id.nextval, #{name}, #{password}, #{content}, sysdate) 
 		]]>
 	</insert>
-	
+
 	<delete id="delete">
 		<![CDATA[
 			delete from guestbook
 			where no = #{no} and password = #{password}
 		]]>
 	</delete>
+
+	<insert id="insertSelectKey" parameterType="GuestbookVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select seq_guestbook_content_id.nextval from dual
+		</selectKey>
+	<![CDATA[	
+		insert into guestbook
+         	values ( #{no }, #{name }, #{password }, #{content }, SYSDATE )
+    	]]>
+	</insert>
+	
+	<select id="selectByNo" parameterType="int" resultType="GuestbookVo">
+		<![CDATA[
+			select no, name, password, content, reg_date
+			from guestbook
+			where no = #{no}	
+		]]>	
+	</select>
 </mapper>

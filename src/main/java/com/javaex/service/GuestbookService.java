@@ -28,4 +28,11 @@ public class GuestbookService {
 		System.out.println("GuestbookService:delete()");
 		return guestbookDao.deleteByGuestbookVo(guestbookVo);
 	}
+	
+	
+	public GuestbookVo addGuest(GuestbookVo guestbookVo) {
+		guestbookDao.insertSelectKey(guestbookVo);
+		return guestbookDao.selectByNo(guestbookVo.getNumber());
+		
+	}
 }
