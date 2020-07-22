@@ -145,7 +145,7 @@
 					<button type="button" class="btn btn-danger" id="btnDel" value="">삭제</button>
 				</div>
 				
-					<input type="text" id="btnUno" value="${sessionScope.authUser.no}">
+					<%-- <input type="text" id="btnUno" value="${sessionScope.authUser.no}"> --%>
 				
 				
 				
@@ -196,7 +196,10 @@ $("#viewArea>li").on("click", function() {
 		    $("#viewModelContent").text(gVo.content);
 		    $("[name='no']").val(no);
 		    
-		    if(user_no==gVo.user_no){
+		    //서버는 jsp에서 el jstl 우선시해서 문자로 바꿔서 클라이언트로 보낸다
+		    //즉 js 내부에서도 el jstl 사용가능
+		    //세션을 받는 jstl을 ""로 묶어주면 로그아웃상태에서도 null이 아닌 ""이 입력되기 때문에 에러가 나지않는다
+		    if("${sessionScope.authUser.no}"==gVo.user_no){
 		    	$("#btnDel").show();
 		    	$("#btnDel").val(gVo.no);
 		    	$("#btnUno").val
