@@ -34,8 +34,8 @@ public class GalleryService {
 		int user_no = (Integer) gMap.get("user_no");
 		String content = (String) gMap.get("content");
 
-		String saveDir = "C:\\javaStudy\\gallery\\";
-
+		//String saveDir = "C:\\javaStudy\\gallery\\";
+		String saveDir = "/upload";
 		// 원파일이름
 		String orgName = file.getOriginalFilename();
 		System.out.println(orgName);
@@ -46,7 +46,8 @@ public class GalleryService {
 		String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
 		System.out.println(saveName);
 		// hdd 저장경로
-		String filePath = saveDir + saveName;
+		/* String filePath = saveDir +"\\"+ saveName; */
+		String filePath = saveDir +"/"+ saveName;
 		System.out.println(filePath);
 		// 파일사이즈
 		long fileSize = file.getSize();

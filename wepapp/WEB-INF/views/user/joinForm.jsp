@@ -56,7 +56,7 @@
 			<div id="user">
 				<div id="joinForm">
 					<form action="${pageContext.request.contextPath}/user/join"
-						method="get">
+						method="get" id="joinFormTag">
 
 						<!-- 아이디 -->
 						<div class="form-group">
@@ -154,6 +154,16 @@ $("#joinCheck").click(function(){
 		});
 });
 
+$("#joinFormTag").on("submit", function(){
+	var agree = $("#chk-agree").is(":checked");
+	console.log(agree);
+	if(agree==true){
+		return true;
+	} else {
+		alert("약관에 동의해주세요");
+		return false;
+	}
+});
 
 </script>
 </html>

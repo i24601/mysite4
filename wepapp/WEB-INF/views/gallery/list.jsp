@@ -182,6 +182,7 @@ $("#viewArea>li").on("click", function() {
 		data : {no : no},
 		//json으로 보내는것
 		/* data : JSON.stringify(no), */
+		/* 받는쪽은 Requestbody */
 		
 
 		

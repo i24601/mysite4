@@ -29,4 +29,5 @@ public class ApiGalleryController {
 		System.out.println("받은데이터"+no);
 		return galleryService.deleteByNo(no);
 	}
+	
 }

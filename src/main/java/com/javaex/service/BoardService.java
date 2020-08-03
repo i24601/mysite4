@@ -12,7 +12,7 @@ import com.javaex.vo.BoardVo;
 
 @Service
 public class BoardService {
-
+	
 	@Autowired
 	private BoardDao boardDao;
 	
